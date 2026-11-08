@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long m,N=50e8+5;
+int n;
+int af[500000005],b[500000005][500000005],z[500000005][500000005][500000005],q[500000005];
+int main(){
+    freopen("crystal.in","r",stdin);
+    freopen("crystal.out","w",stdout);
+    cin>>n>>m;
+    for(int i=1;i<=n;i++){
+    	cin>>af[i];
+	}
+	for(int i=1;i<n;i++){
+		for(int j=i;j<=n;j++){
+			b[i][j]=af[j];
+		}
+	}
+	int g=1;
+	while(g){
+		for(int a=1;a<n;a++){
+			z[a][a][a]=b[a][a];
+			for(int tb=a+1;tb<=n;tb++){
+				z[a][tb][tb]=b[a][tb];
+				for(int c=tb+1;c<=n;c++){
+					z[a][tb][c]=b[a][c];
+			 	}
+			}
+		}
+		for(int a=1;a<n;a++){
+			int p=0,ans=0;
+
+			for(int tb=a+1;tb<=n;tb++){
+
+				for(int c=tb+1;c<=n;c++){
+					if(z[a][a][a]>z[a][tb][tb]){
+					   p=z[a][a][a];
+				    }
+					else{
+					   p=z[a][td][tb];
+				    }
+				    if(z[a][tb][c]>p)
+					     p=z[a][tb][c];
+			 	}
+			}
+			ans+=p-z[a][a][a];
+			for(int  i=a+1;i<=n;i++){
+				ans+=p-z[a][i][i];
+				for(int j=i+1;j<=n;j++){
+					ans+=p-z[a][i][j];
+			 	}
+				if(ans<=m)
+			       q[i]=i;
+			}
+
+		}
+		g=0;
+	}
+	int ans2=0;
+	for(int i=1;i<=n;i++)
+	{
+		if(q[i]!=0){
+		   if(q[i]>ans2)
+		      ans2=q[i];
+	    }
+	}
+	cout<<a[i];
+    return 0;
+}
